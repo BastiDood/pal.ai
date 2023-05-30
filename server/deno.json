@@ -4,11 +4,14 @@
         "strict": true
     },
     "tasks": {
-        "start": "deno run --allow-env --allow-net src/main.ts"
+        "start": "deno run --allow-env --allow-net --allow-read src/main.ts"
     },
     "imports": {
+        "http/file": "https://deno.land/std@0.190.0/http/file_server.ts",
         "http/server": "https://deno.land/std@0.190.0/http/server.ts",
+        "http/status": "https://deno.land/std@0.190.0/http/http_status.ts",
         "log": "https://deno.land/std@0.190.0/log/mod.ts",
+        "path": "https://deno.land/std@0.190.0/path/mod.ts",
         "testing/asserts": "https://deno.land/std@0.190.0/testing/asserts.ts",
         "zod": "https://deno.land/x/zod@v3.21.4/mod.ts"
     }
