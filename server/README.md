@@ -14,7 +14,7 @@ The proxy server is powered by the [Deno] runtime for [TypeScript].
 
 # Running the Application
 
-Before starting the server, make sure to [build the client](../client/README.md) `dist` folder must exist.
+Before starting the server, make sure to [build the client](../client/README.md). Specifically, the `dist` folder must exist.
 
 ## Bash
 
