@@ -1,0 +1,23 @@
+name: 
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+  client:
+    defaults:
+      run:
+        working-directory: client
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install pnpm
+        run: npm install --global pnpm
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build Project
+        run: pnpm build
