@@ -1,0 +1,8 @@
+{
+    "name": "pal.ai",
+    "short_name": "pal.ai",
+    "description": "A rice disease classification app.",
+    "display": "standalone",
+    "background_color": "#fff",
+    "start_url": "."
+}
