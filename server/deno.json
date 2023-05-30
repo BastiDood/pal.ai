@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "noUncheckedIndexedAccess": true,
+        "strict": true
+    },
+    "tasks": {
+        "start": "deno run --allow-env --allow-net src/main.ts"
+    },
+    "imports": {
+        "http/server": "https://deno.land/std@0.190.0/http/server.ts",
+        "log": "https://deno.land/std@0.190.0/log/mod.ts",
+        "testing/asserts": "https://deno.land/std@0.190.0/testing/asserts.ts",
+        "zod": "https://deno.land/x/zod@v3.21.4/mod.ts"
+    }
+}
