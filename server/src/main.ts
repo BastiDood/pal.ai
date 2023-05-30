@@ -1,5 +1,5 @@
 import { assert } from 'testing/asserts';
-import { info } from 'log';
+import { info, warning } from 'log';
 import { serveListener } from 'http/server';
 
 import { env } from './env.ts';
@@ -13,4 +13,4 @@ assert(listener.addr.transport === 'tcp');
 
 info(`[Server] Initialized at ${listener.addr.hostname}:${listener.addr.port}`);
 await serveListener(listener, handle, controller);
-info('[Server] Closed');
+warning('[Server] Closed');
