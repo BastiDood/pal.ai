@@ -6,7 +6,6 @@
     "source": "src/index.html",
     "scripts": {
         "build": "parcel build",
-        "dev": "parcel --no-hmr --port 8080",
         "watch": "parcel watch --no-hmr"
     },
     "devDependencies": {
@@ -45,6 +44,7 @@
         "typescript-svelte-plugin": "^0.3.26"
     },
     "dependencies": {
+        "cropperjs": "^1.5.13",
         "http-status-codes": "^2.2.0",
         "zod": "^3.21.4"
     }
