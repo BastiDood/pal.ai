@@ -11,4 +11,4 @@ Any file in this project that does not state otherwise and is not listed below a
 
 Files | Author(s) | License
 --- | --- | ---
-`client/src/assets/fonts/fraunces/*.{ttf,txt}` | [The Fraunces Project Authors](https://github.com/undercasetype/Fraunces) | [Open Font License v1.1](https://github.com/undercasetype/Fraunces/blob/ad58030f7daa4d12f14f4c059b7ed1205e28105c/OFL.txt)
+`client/src/assets/fonts/fraunces/*.{ttf,txt}` | [The Fraunces Project Authors](https://github.com/undercasetype/Fraunces) | [Open Font License v1.1](./client/src/assets/fonts/fraunces/OFL.txt)
