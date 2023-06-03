@@ -11,6 +11,6 @@ Deno.addSignalListener('SIGINT', () => controller.abort());
 const listener = Deno.listen({ port: env.PORT });
 assert(listener.addr.transport === 'tcp');
 
-info(`[Server] Initialized at ${listener.addr.hostname}:${listener.addr.port}`);
+info(`[META] initialized at ${listener.addr.hostname}:${listener.addr.port}`);
 await serveListener(listener, handle, controller);
-warning('[Server] Closed');
+warning('[META] Closed');
