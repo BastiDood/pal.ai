@@ -1,6 +1,7 @@
 <script>
     import { register } from './register.ts';
     import Button from './lib/components/Button.svelte';
+    import ResultPage from './ResultPage.svelte';
 </script>
 
 <main>
@@ -15,6 +16,12 @@
         <br>
         <Button>Upload image</Button>
         <Button type="secondary">Back</Button>
+        <br>
+
+        --Sample results card--
+        <br>
+        <ResultPage/>
+        
     </div>
     
 </main>
