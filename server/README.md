@@ -26,7 +26,7 @@ PORT=4444
 API_KEY=HuggingFace
 
 # Start the server.
-deno run start
+deno task start
 ```
 
 ## Powershell
@@ -39,5 +39,5 @@ $env:PORT = 4444
 $env:API_KEY = 'HuggingFace'
 
 # Start the server.
-deno run start
+deno task start
 ```
