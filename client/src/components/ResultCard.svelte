@@ -1,45 +1,39 @@
-<script>
+<script lang="ts">
+    import Accuracy from './Accuracy.svelte';
     import Button from './Button.svelte';
+
+    export let accuracy: number;
+    export let disease: string;
 </script>
 
-<article>
+<div class="root">
     <h1>Results</h1>
-
-    <slot name="diagnosis" />
-
-    <br />
-
-    <span>Accuracy:</span>
-    <slot name="accuracy" />
-
-    <div class="buttongroup">
+    <hr />
+    <p>Disease Identified: {disease}</p>
+    <p>Accuracy: <Accuracy {accuracy} /></p>
+    <div class="group">
         <Button variant="secondary">Re-run</Button>
-        <Button>Try another</Button>
+        <Button>Try Another</Button>
     </div>
-</article>
+</div>
 
 <style>
-    article {
-        margin: 1.75em;
-        padding: 1em;
-        min-width: 25%;
-        max-width: fit-content;
-        border: 2px solid var(--palai-black);
-        border-radius: 8px;
+    hr {
+        border: 0.125rem solid var(--palai-yellow);
+    }
+
+    .root {
+        border: 0.125rem solid var(--palai-black);
+        border-radius: 0.5rem;
         background-color: var(--palai-white);
+        box-shadow: 0.125rem 0.125rem;
         color: var(--palai-black);
-        box-shadow: 2px 2px;
+        padding: 1rem;
+        width: fit-content;
     }
 
-    h1 {
-        padding-bottom: 0.25em;
-        border-bottom: 3px solid var(--palai-yellow);
-    }
-
-    .buttongroup {
+    .group {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        margin-top: 1.25em;
+        justify-content: space-around;
     }
 </style>
