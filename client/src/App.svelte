@@ -8,8 +8,8 @@
     {#await register()}
         Loading service worker...
     {:then}
-        <Button>Upload image</Button>
+        <Button>Upload Image</Button>
         <Button variant="secondary">Back</Button>
-        <ResultPage />
+        <ResultPage accuracy={0.9667} disease="Tungro" />
     {/await}
 </main>
