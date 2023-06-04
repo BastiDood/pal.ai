@@ -17,18 +17,18 @@
 </script>
 
 <main>
-        <ResultCard>
-            <span slot="diagnosis">
-                {#if disease}
-                    Disease identified: {disease}
-                {:else}
-                    No disease identified!
-                {/if}
-            </span>
-            <span slot="accuracy" class={score}>
-                {accuracy_score*100}%
-            </span>
-        </ResultCard>
+    <ResultCard>
+        <span slot="diagnosis">
+            {#if disease}
+                Disease identified: {disease}
+            {:else}
+                No disease identified!
+            {/if}
+        </span>
+        <span slot="accuracy" class={score}>
+            {accuracy_score*100}%
+        </span>
+    </ResultCard>
 </main>
 
 <style>
