@@ -8,11 +8,8 @@
     {#await register()}
         Loading service worker...
     {:then}
-        <p>--Sample buttons--</p>
         <Button>Upload image</Button>
         <Button variant="secondary">Back</Button>
-
-        <p>--Sample results card--</p>
-        <ResultPage/>
+        <ResultPage />
     {/await}
 </main>
