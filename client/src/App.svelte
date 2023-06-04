@@ -10,7 +10,7 @@
     {:then}
         <p>--Sample buttons--</p>
         <Button>Upload image</Button>
-        <Button type="secondary">Back</Button>
+        <Button variant="secondary">Back</Button>
 
         <p>--Sample results card--</p>
         <ResultPage/>

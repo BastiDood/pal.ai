@@ -13,7 +13,7 @@
     <slot name="accuracy" />
 
     <div class="buttongroup">
-        <Button type="secondary">Re-run</Button>
+        <Button variant="secondary">Re-run</Button>
         <Button>Try another</Button>
     </div>
 </article>

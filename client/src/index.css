@@ -17,8 +17,10 @@
 :root {
     --palai-yellow: #e5c261;
     --palai-yellow-hover: #ecd38d;
+    --palai-yellow-text-hover: #8c8076;
     --palai-white: #f4f4e8;
     --palai-black: #393430;
+
     --dark-green: #354842;
     --success-green: #7bb555;
     --warning-orange: #f8a51d;
