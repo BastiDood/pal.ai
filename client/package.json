@@ -44,8 +44,6 @@
         "typescript-svelte-plugin": "^0.3.26"
     },
     "dependencies": {
-        "cropperjs": "^1.5.13",
-        "http-status-codes": "^2.2.0",
-        "zod": "^3.21.4"
+        "http-status-codes": "^2.2.0"
     }
 }
