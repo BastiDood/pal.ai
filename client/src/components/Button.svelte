@@ -1,9 +1,10 @@
-<script>
-    export let type = "primary";
+<script lang="ts">
+    export let type = 'button' as HTMLButtonElement['type'];
+    export let variant = 'primary';
     export let disabled = false;
 </script>
 
-<button class={type} {disabled} on:click>
+<button {type} {disabled} class={variant} on:click>
     <slot />
 </button>
 

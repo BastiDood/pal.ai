@@ -1,0 +1,11 @@
+.high {
+    color: var(--success-green);
+}
+
+.medium {
+    color: var(--warning-orange);
+}
+
+.low {
+    color: var(--danger-red);
+}

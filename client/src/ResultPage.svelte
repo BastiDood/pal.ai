@@ -1,5 +1,5 @@
 <script>
-    import ResultCard from './lib/components/ResultCard.svelte';
+    import ResultCard from './components/ResultCard.svelte';
 
     // Dummy variables to test ResultCard
     let disease = "Tungro";         // disease found
