@@ -15,6 +15,7 @@
         border-radius: 0.25rem;
         color: var(--palai-black);
         cursor: pointer;
+        font-family: inherit;
         padding: 0.5rem 1rem 0.5rem;
         transition:
             background-color 0.3s,

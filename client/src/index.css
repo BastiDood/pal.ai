@@ -25,9 +25,11 @@
     --success-green: #7bb555;
     --warning-orange: #f8a51d;
     --danger-red: #f44336;
+
+    font-family: 'Fraunces';
+    background-color: var(--palai-white);
 }
 
 body {
-	margin: 0;
-    background-color: var(--palai-white);
+    margin: 0;
 }
