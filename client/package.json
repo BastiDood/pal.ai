@@ -44,6 +44,7 @@
         "typescript-svelte-plugin": "^0.3.26"
     },
     "dependencies": {
-        "http-status-codes": "^2.2.0"
+        "http-status-codes": "^2.2.0",
+        "zod": "^3.21.4"
     }
 }
