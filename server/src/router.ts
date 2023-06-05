@@ -1,8 +1,11 @@
-import { assertInstanceOf, unimplemented } from 'testing/asserts';
+import { assertInstanceOf } from 'testing/asserts';
 import { Status } from 'http/status';
 import { error, info } from 'log';
+import { ClassificationSchema } from 'model';
 import { contentType } from 'media-types/content-type';
 import { extname, fromFileUrl, join } from 'path';
+
+import { env } from './env.ts';
 
 // HACK: Use a more robust way to resolve Linux and Windows file paths.
 const STATIC_ROOT = fromFileUrl(import.meta.resolve('../../client/dist'));
@@ -36,8 +39,20 @@ async function get(req: Request) {
     }
 }
 
-function post(req: Request): Response {
-    unimplemented();
+async function post(req: Request) {
+    const res = await fetch('https://api-inference.huggingface.co/models/jkrperson/Beit-for-rice-disease', {
+        headers: { Authorization: `Bearer ${env.API_KEY}` },
+        method: 'POST',
+        body: req.body,
+    });
+    switch (res.status) {
+        case Status.OK:
+            return new Response(JSON.stringify(ClassificationSchema.parse(await res.json())));
+        case Status.ServiceUnavailable:
+            return new Response(null, { status: Status.ServiceUnavailable });
+        default:
+            return new Response(null, { status: Status.NotImplemented });
+    }
 }
 
 function route(method: string) {
