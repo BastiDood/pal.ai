@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let type = 'button' as HTMLButtonElement['type'];
+    export let type = 'button' as 'button' | 'reset' | 'submit';
     export let variant = 'primary';
     export let disabled = false;
 </script>
