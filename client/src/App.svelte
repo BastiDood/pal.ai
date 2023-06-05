@@ -1,5 +1,6 @@
 <script>
     import { register } from './register.ts';
+    import FileUpload from './components/FileUpload.svelte';
     import Button from './components/Button.svelte';
     import ResultCard from './components/ResultCard.svelte';
 </script>
@@ -8,7 +9,8 @@
     {#await register()}
         Loading service worker...
     {:then}
-        <Button>Upload Image</Button>
+        <br>
+        <FileUpload/>
         <Button variant="secondary">Back</Button>
         <ResultCard accuracy={0.9667} disease="Tungro" />
     {/await}
