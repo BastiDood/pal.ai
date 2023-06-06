@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { ClassificationSchema } from '../models/Classification.ts';
 
-export async function upload(body: File) {
+export async function upload(body: Blob) {
     const res = await fetch('/', { method: 'POST', body });
     switch (res.status) {
         case StatusCodes.OK: return ClassificationSchema.parse(await res.json());
