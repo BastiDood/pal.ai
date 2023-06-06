@@ -27,31 +27,33 @@
 
 <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
     <label for="upload">🌾 Upload Image</label>
+    <br>
     <input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />
     <Button type="submit">Submit</Button>
 </form>
 
 <style>
-    input[type="file"] {
-        display: none;
-    }
-    
     label {
-        width: fit-content;
+        font-weight: 900;
+        color: var(--palai-black);
+    }
+
+    input[type="file"]::file-selector-button {
         padding: 0.5rem 1rem 0.5rem;
         border: 0.125rem solid currentColor;
         border-radius: 0.25rem;
+        background-color: transparent;
         color: var(--palai-black);
         cursor: pointer;
         font-weight: bold;
         transition: opacity 0.3s;
     }
 
-    label:active {
+    input[type="file"]::file-selector-button:active {   
         box-shadow: inset 0.125rem 0.125rem rgba(0, 0, 0, 0.4);
 	}
 
-    label:hover {
+    input[type="file"]::file-selector-button:hover {   
         opacity: 0.45;
     }
 </style>
