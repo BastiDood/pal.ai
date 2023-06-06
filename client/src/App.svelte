@@ -4,7 +4,7 @@
     import Button from './components/Button.svelte';
     import ResultCard from './components/ResultCard.svelte';
 
-    let src: string = '';
+    let src = '';
 
     function renderImage(event: CustomEvent) {
         src = URL.createObjectURL(event.detail);
