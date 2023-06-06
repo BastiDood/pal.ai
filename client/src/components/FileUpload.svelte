@@ -9,16 +9,22 @@
     $: [file, ..._] = files ?? [];
 
     const dispatch = createEventDispatcher();
+
     async function handleSubmit(this: HTMLFormElement) {
         if (typeof file === 'undefined') return;
         const payload = await upload(file);
         dispatch('done', payload);
     }
+
+    function handleChange() {
+        if (typeof file !== 'undefined')
+            dispatch('image', file);
+    }
 </script>
 
 <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
     <label for="upload">🌾 Upload Image</label>
-    <input type="file" accept="image/*" name="upload" id="upload" bind:files />
+    <input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />
     <Button type="submit">Submit</Button>
 </form>
 
