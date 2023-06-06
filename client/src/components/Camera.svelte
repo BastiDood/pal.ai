@@ -7,8 +7,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
 
-    let video: HTMLVideoElement;
-
+    let video: HTMLVideoElement | undefined;
     onMount(() => {
         navigator
             .mediaDevices
@@ -16,9 +15,25 @@
                 audio: false,
                 video: { facingMode: 'environment' },
             })
-            .then(stream => (video.srcObject = stream))
+            .then(stream => {
+                assert(typeof video !== 'undefined');
+                video.srcObject = stream;
+            })
             .catch(console.error);
     });
+
+    export function capture() {
+        if (typeof video === 'undefined' || video.srcObject === null)
+            return null;
+
+        assert(video.srcObject instanceof MediaStream);
+        const [track, ...rest] = video.srcObject.getVideoTracks();
+        assert(typeof track !== 'undefined');
+        assert(rest.length === 0);
+
+        const cap = new ImageCapture(track);
+        return cap.takePhoto();
+    }
 </script>
 
 <video autoplay bind:this={video}></video>
