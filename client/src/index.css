@@ -33,3 +33,11 @@
 body, h1 {
     margin: 0;
 }
+
+main {
+    height: 100vh;
+    display: grid;
+    grid-gap: 1rem;
+    justify-items: center;
+    align-content: center;
+}
