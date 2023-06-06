@@ -27,9 +27,10 @@
 
 <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
     <label for="upload">🌾 Upload Image</label>
-    <br>
-    <input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />
-    <Button type="submit">Submit</Button>
+    <div>
+        <input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />    
+        <Button type="submit">Submit</Button>
+    </div>
 </form>
 
 <style>
