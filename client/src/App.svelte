@@ -7,6 +7,7 @@
     let src = '';
 
     function renderImage(event: CustomEvent) {
+        URL.revokeObjectURL(src);
         src = URL.createObjectURL(event.detail);
     }
 </script>
