@@ -15,10 +15,32 @@
     {#await register()}
         Loading service worker...
     {:then}
-        {#if src}
-            <img {src} alt="upload" />
-        {/if}
+        <div class="img-container">
+            {#if src}
+                <img {src} alt="upload" />
+            {:else}
+                🗋
+            {/if}
+        </div>
         <FileUpload on:image={renderImage} />
         <ResultCard accuracy={0.9667} disease="Tungro" />
     {/await}
 </main>
+
+<style>
+    .img-container {
+        width: 224px;
+        height: 224px;
+        border: 0.125rem solid var(--palai-black);
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+    }
+
+    img {
+        width: inherit;
+        height: inherit;
+    }
+</style>
