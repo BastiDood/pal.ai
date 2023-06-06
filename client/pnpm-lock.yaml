@@ -97,6 +97,9 @@ devDependencies:
   '@types/serviceworker':
     specifier: ^0.0.67
     version: 0.0.67
+  '@types/w3c-image-capture':
+    specifier: ^1.0.7
+    version: 1.0.7
   parcel:
     specifier: ~2.8.3
     version: 2.8.3
@@ -1168,6 +1171,16 @@ packages:
 
   /@types/serviceworker@0.0.67:
     resolution: {integrity: sha512-7TCH7iNsCSNb+aUD9M/36TekrWFSLCjNK8zw/3n5kOtRjbLtDfGYMXTrDnGhSfqXNwpqmt9Vd90w5C/ad1tX6Q==}
+    dev: true
+
+  /@types/w3c-image-capture@1.0.7:
+    resolution: {integrity: sha512-BNmjJT+yjwVzB6N5kf1/m9YZMF//e3JAcII+TIuhRkALn7UD9xZX0R1azVGqqyYuQKbQ6UskC+zSQctnsk9zHg==}
+    dependencies:
+      '@types/webrtc': 0.0.35
+    dev: true
+
+  /@types/webrtc@0.0.35:
+    resolution: {integrity: sha512-TUY+7ZYUBSYKNyFJ6hKS6UpZuejDHCGdJ5lBGzFMYSAq+Tqdqu3v3Rjtg+RyFl24Ko7OK8AYFGfsjMJzmB+dVQ==}
     dev: true
 
   /abortcontroller-polyfill@1.7.5:
