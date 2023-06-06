@@ -11,7 +11,10 @@
     const dispatch = createEventDispatcher();
 
     async function handleSubmit(this: HTMLFormElement) {
-        if (typeof file === 'undefined') return;
+        if (typeof file === 'undefined') {
+            alert("Please upload an image.");
+            return;
+        }
         const payload = await upload(file);
         dispatch('done', payload);
     }
