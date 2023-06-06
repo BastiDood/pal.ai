@@ -28,6 +28,13 @@
 </main>
 
 <style>
+    main {
+        height: 100vh;
+        display: grid;
+        grid-gap: 1rem;
+        justify-items: center;
+        align-content: center;
+    }
     .img-container {
         width: 224px;
         height: 224px;
