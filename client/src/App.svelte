@@ -23,7 +23,7 @@
                 🗋
             {/if}
         </div>
-        <FileUpload on:image={renderImage} />
+        <FileUpload on:image={renderImage} on:destroy={() => URL.revokeObjectURL(src)} />
         <ResultCard accuracy={0.9667} disease="Tungro" />
     {/await}
 </main>
