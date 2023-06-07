@@ -1,18 +1,20 @@
 <script lang="ts">
-    import Accuracy from './Accuracy.svelte';
-    import Button from './Button.svelte';
+    import type { LabelsRecord } from '../models/Classification';
 
-    export let accuracy: number;
-    export let disease: string;
+    import Button from './Button.svelte';
+    import SingleResult from './SingleResult.svelte';
+
+    export let results: LabelsRecord;
 </script>
 
 <div class="root">
-    <h1>Results</h1>
+    <h1>Results (Top 5)</h1>
     <hr />
-    <p>Disease Identified: {disease}</p>
-    <p>Accuracy: <Accuracy {accuracy} /></p>
     <div class="group">
-        <Button variant="secondary">Re-run</Button>
+        {#each Object.entries(results) as [disease, accuracy] (disease)}
+            <SingleResult {disease} {accuracy}/>
+        {/each}
+
         <Button>Try Another</Button>
     </div>
 </div>
@@ -33,7 +35,8 @@
     }
 
     .group {
-        display: flex;
+        display: grid;
         justify-content: space-around;
+        gap: 0.5rem;
     }
 </style>

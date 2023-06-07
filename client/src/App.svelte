@@ -80,10 +80,7 @@
         <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
 
         {#if state !== null && !('blob' in state)}
-            
-            {#each Object.entries(state) as [key, value] (key)}
-                <p>{key} {value}</p>
-            {/each}
+            <ResultCard results={state}/>
         {/if}
 
     {/await}
