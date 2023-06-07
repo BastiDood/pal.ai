@@ -34,8 +34,8 @@
     <div class="capture-container">
         <button on:click={() => dialog?.close()}>❌</button>
         <Camera bind:this={camera} />
+        <Button {disabled} variant="primary" on:click={takePhoto}>📸 Take picture</Button>
     </div>
-    <Button {disabled} variant="primary" on:click={takePhoto}>📸 Take picture</Button>
 </dialog>
 
 <style>
