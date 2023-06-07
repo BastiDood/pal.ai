@@ -79,21 +79,22 @@
                 <img src={imgcache} alt="upload" />
             {/if}
         </div>
+
         {#if state === null || 'blob' in state}
-            <div>
-                <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
-                <label for="upload">📤 Upload Image</label>
-                <div class="upload-choice">
-                    <FileUpload on:image={renderImage} />
-                    <p>or</p>
-                    <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
-                </div>
+            <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
+            <label for="upload">📤 Upload Image</label>
+            <div class="upload-choice">
+                <FileUpload on:image={renderImage} />
+                <span>or</span>
+                <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
+            </div>
+            <span class="submitBtn">
                 <Button type="submit" variant="tertiary">Submit</Button>
-                </form>
-            </div>    
+            </span>
+            </form>
         {:else}
             <span in:fly="{{y: 50, duration: 1200, easing: expoOut}}">    
-                <ResultCard results={state} on:reset={resetUpload}/>
+                <ResultCard results={state} on:reset={resetUpload} />
             </span>
         {/if}
     {/await}
@@ -132,9 +133,12 @@
     }
 
     .upload-choice {
-        align-items: center;
         display: flex;
-        justify-content: space-between;
-        width: 105%;
+        flex-direction: column;
+        padding: 0.5rem 0;
+    }
+
+    .submitBtn {
+        float: right;
     }
 </style>
