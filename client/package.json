@@ -2,7 +2,7 @@
     "name": "pal.ai",
     "version": "0.1.0",
     "type": "module",
-    "packageManager": "pnpm@8",
+    "packageManager": "pnpm@8.6.1",
     "source": "src/index.html",
     "scripts": {
         "build": "parcel build",
