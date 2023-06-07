@@ -27,6 +27,10 @@
         box-shadow: inset 0.125rem 0.125rem rgba(0, 0, 0, 0.4);
     }
 
+    button:disabled:not([hover]) {
+        opacity: 40%;
+    }
+
     .primary {
         background-color: var(--palai-yellow);
     }
