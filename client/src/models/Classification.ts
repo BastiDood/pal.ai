@@ -19,12 +19,16 @@ export enum Disease {
 
 export const DiseaseSchema = z.nativeEnum(Disease);
 
+const ScoreSchema = z.number().min(0).max(1);
+
 export const ClassificationSchema = z
-    .object({ label: DiseaseSchema, score: z.number().min(0).max(1) })
+    .object({ label: DiseaseSchema, score: ScoreSchema })
     .array()
     .transform(classification => {
         const pairs = classification.map(({ label, score }) => [label, score] as const);
         return Object.fromEntries(pairs);
     });
-
 export type Classification = z.infer<typeof ClassificationSchema>;
+
+export const LabelsRecordSchema = z.record(DiseaseSchema, ScoreSchema);
+export type LabelsRecord = z.infer<typeof LabelsRecordSchema>;
