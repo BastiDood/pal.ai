@@ -19,6 +19,7 @@
     }
     
     let state = null as State | LabelsRecord | null;
+    let imgcache = '';
 
     function revokeBlobUrl() {
         if (state !== null && 'url' in state)
@@ -31,6 +32,7 @@
             blob: detail,
             url: URL.createObjectURL(detail),
         } satisfies State;
+        imgcache = state.url;
     }
 
     function closeAfterRenderImage(event: CustomEvent<Blob>) {
@@ -40,6 +42,7 @@
 
     function resetUpload() {
         state = null;
+        imgcache = '';
     }
 
     async function handleSubmit(this: HTMLFormElement) {
@@ -70,8 +73,8 @@
         <div class="img-container">
             {#if state === null}
                 🗋
-            {:else if 'url' in state}
-                <img src={state.url} alt="upload" />
+            {:else}
+                <img src={imgcache} alt="upload" />
             {/if}
         </div>
         {#if state === null || 'blob' in state}
