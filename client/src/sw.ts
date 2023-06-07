@@ -28,8 +28,7 @@ async function activateWorker() {
 async function interceptFetch(req: Request) {
     const cache = await caches.open(version);
     const res = await cache.match(req);
-    assert(res instanceof Response);
-    return res;
+    return res ?? fetch(req);
 }
 
 self.addEventListener('install', evt => {
