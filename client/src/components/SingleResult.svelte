@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { displayNames } from '../utils';
+    
     import Accuracy from './Accuracy.svelte';
 
     export let disease: string;
@@ -6,7 +8,11 @@
 </script>
 
 <div>
-    <p>Disease Identified: {disease}</p>
+    {#if disease == 'healthy_rice_plant'}
+        <p>Healthy (No disease identified)</p>
+    {:else}
+        <p>Disease Identified: {displayNames(disease)}</p>
+    {/if}
     <p>Accuracy: <Accuracy {accuracy} /></p>
 </div>
 
