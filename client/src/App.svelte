@@ -10,11 +10,24 @@
 
     let capture: Capture | undefined;
 
-    let src = '';
+    interface State {
+        blob: Blob;
+        url: string;
+    }
 
-    function renderImage(event: CustomEvent<Blob>) {
-        if (src) URL.revokeObjectURL(src);
-        src = URL.createObjectURL(event.detail);
+    let state = null as State | null;
+
+    function revokeBlobUrl() {
+        if (state !== null)
+            URL.revokeObjectURL(state.url);
+    }
+
+    function renderImage({ detail }: CustomEvent<Blob>) {
+        revokeBlobUrl();
+        state = {
+            blob: detail,
+            url: URL.createObjectURL(detail),
+        };
     }
 
     function closeAfterRenderImage(event: CustomEvent<Blob>) {
@@ -22,9 +35,7 @@
         capture?.close();
     }
 
-    onDestroy(() => {
-        if (src) URL.revokeObjectURL(src);
-    });
+    onDestroy(revokeBlobUrl);
 </script>
 
 <main>
@@ -32,10 +43,10 @@
         Loading service worker...
     {:then}
         <div class="img-container">
-            {#if src}
-                <img {src} alt="upload" />
-            {:else}
+            {#if state === null}
                 🗋
+            {:else}
+                <img src={state.url} alt="upload" />
             {/if}
         </div>
         <FileUpload on:image={renderImage} />
