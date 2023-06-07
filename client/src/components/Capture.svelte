@@ -1,24 +1,41 @@
 <script lang="ts">
+    import { createEventDispatcher } from 'svelte';
+
     import { assert } from '../assert.ts';
+
     import Button from './Button.svelte';
-    
     import Camera from './Camera.svelte';
 
     let camera: Camera | undefined;
     let dialog: HTMLDialogElement | undefined;
+    let disabled = false;
 
     export async function open() {
         assert(await camera?.open());
         dialog?.showModal();
     }
+
+    export function close() {
+        dialog?.close();
+    }
+
+    const dispatch = createEventDispatcher();
+
+    async function takePhoto() {
+        disabled = true;
+        const capture = await camera?.capture();
+        if (capture)
+            dispatch('image', capture);
+        disabled = false;
+    }
 </script>
 
-<dialog on:close={() => camera?.close()} bind:this={dialog}>
+<dialog on:close={() => camera?.close()} on:close bind:this={dialog}>
     <div class="capture-container">
         <button on:click={() => dialog?.close()}>❌</button>
         <Camera bind:this={camera} />
     </div>
-    <Button variant="primary">📸 Take picture</Button>
+    <Button {disabled} variant="primary" on:click={takePhoto}>📸 Take picture</Button>
 </dialog>
 
 <style>
