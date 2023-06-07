@@ -40,7 +40,7 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: bad-hedgehog-12
+          project: palai
           root: deploy
           entrypoint: ./server/src/main.ts
           import-map: ./server/deno.json
