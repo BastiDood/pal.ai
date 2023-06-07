@@ -11,9 +11,15 @@
     let capture: Capture | undefined;
 
     let src = '';
-    function renderImage(event: CustomEvent<File>) {
+
+    function renderImage(event: CustomEvent<Blob>) {
         if (src) URL.revokeObjectURL(src);
         src = URL.createObjectURL(event.detail);
+    }
+
+    function closeAfterRenderImage(event: CustomEvent<Blob>) {
+        renderImage(event);
+        capture?.close();
     }
 
     onDestroy(() => {
@@ -36,7 +42,7 @@
         <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
     {/await}
 </main>
-<Capture bind:this={capture} />
+<Capture bind:this={capture} on:image={closeAfterRenderImage} />
 
 <style>
     main {
