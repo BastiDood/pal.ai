@@ -29,7 +29,7 @@
     <label for="upload">🌾 Upload Image</label>
     <div>
         <input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />    
-        <Button type="submit">Submit</Button>
+        <Button type="submit" variant="tertiary">Submit</Button>
     </div>
 </form>
 

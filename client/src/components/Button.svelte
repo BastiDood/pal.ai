@@ -32,11 +32,18 @@
     }
 
     .primary:hover {
-        background-color: var(--palai-yellow-hover);
-        color: var(--palai-yellow-text-hover);
+        filter: brightness(1.10);
     }
 
     .secondary:hover {
         color: darkgrey;
+    }
+
+    .tertiary {
+        background-color: var(--palai-green);
+    }
+
+    .tertiary:hover {
+        filter: brightness(1.15);
     }
 </style>
