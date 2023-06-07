@@ -1,6 +1,6 @@
 import { assertInstanceOf } from 'testing/asserts';
 import { Status } from 'http/status';
-import { error, info } from 'log';
+import { critical, error, info, warning } from 'log';
 import { ClassificationSchema } from 'model';
 import { contentType } from 'media-types/content-type';
 import { extname, fromFileUrl, join } from 'path';
@@ -45,12 +45,16 @@ async function post(req: Request) {
         method: 'POST',
         body: req.body,
     });
+    const json = await res.json();
     switch (res.status) {
         case Status.OK:
-            return new Response(JSON.stringify(ClassificationSchema.parse(await res.json())));
+            info('[POST] successful upload to the model');
+            return new Response(JSON.stringify(ClassificationSchema.parse(json)));
         case Status.ServiceUnavailable:
+            warning(`[POST] model is still starting up ${JSON.stringify(json)}`);
             return new Response(null, { status: Status.ServiceUnavailable });
         default:
+            critical(`[POST] unexpected status code ${res.status} ${JSON.stringify(json)}`);
             return new Response(null, { status: Status.NotImplemented });
     }
 }
