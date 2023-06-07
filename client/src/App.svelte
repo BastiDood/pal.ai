@@ -1,5 +1,7 @@
 <script lang="ts">
     import { onDestroy } from 'svelte';
+    import { fly } from 'svelte/transition';
+    import { expoOut } from 'svelte/easing';
     import { assert } from './assert.ts';
 
     import { register } from './register.ts';
@@ -90,7 +92,9 @@
                 </form>
             </div>    
         {:else}
-            <ResultCard results={state} on:reset={resetUpload}/>
+            <span in:fly="{{y: 50, duration: 1200, easing: expoOut}}">    
+                <ResultCard results={state} on:reset={resetUpload}/>
+            </span>
         {/if}
     {/await}
 </main>
