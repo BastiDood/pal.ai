@@ -44,6 +44,7 @@
         border: 0.125rem solid currentColor;
         border-radius: 0.75rem;
         background-color: lightgray;
+        filter: brightness(1);
     }
 
     input[type="file"]::file-selector-button {
@@ -53,7 +54,7 @@
         cursor: pointer;
         font-weight: bold;
         padding: 0.5rem 1rem 0.5rem;
-        transition: opacity 0.3s;
+        transition: filter 0.3s;
     }
 
     input[type="file"]::file-selector-button:active {   
@@ -61,6 +62,6 @@
 	}
 
     input[type="file"]::file-selector-button:hover {   
-        opacity: 0.45;
+        filter: brightness(1.10);
     }
 </style>

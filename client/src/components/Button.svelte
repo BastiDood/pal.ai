@@ -17,9 +17,9 @@
         cursor: pointer;
         font-family: inherit;
         padding: 0.5rem 1rem 0.5rem;
+        filter: brightness(1);
         transition:
-            background-color 0.3s,
-            border-color 0.3s,
+            filter 0.3s,
             color 0.3s;
     }
 
