@@ -1,8 +1,10 @@
 <script lang="ts">
     import { onDestroy } from 'svelte';
+    import { assert } from './assert.ts';
 
     import { register } from './register.ts';
     import { upload } from './api/upload.ts';
+    import type { LabelsRecord } from './models/Classification.ts';
 
     import Button from './components/Button.svelte';
     import Capture from './components/Capture.svelte';
@@ -15,11 +17,11 @@
         blob: Blob;
         url: string;
     }
-
-    let state = null as State | null;
+    
+    let state = null as State | LabelsRecord | null;
 
     function revokeBlobUrl() {
-        if (state !== null)
+        if (state !== null && 'url' in state)
             URL.revokeObjectURL(state.url);
     }
 
@@ -28,7 +30,7 @@
         state = {
             blob: detail,
             url: URL.createObjectURL(detail),
-        };
+        } satisfies State;
     }
 
     function closeAfterRenderImage(event: CustomEvent<Blob>) {
@@ -42,6 +44,7 @@
             return;
         }
 
+        assert('blob' in state);
         const payload = await upload(state.blob);
         if (payload === null) {
             alert('The model is still starting up. Please try again later.');
@@ -49,9 +52,8 @@
         }
 
         revokeBlobUrl();
-        state = null;
         this.reset();
-        console.log(payload);
+        state = payload;
     }
 
     onDestroy(revokeBlobUrl);
@@ -64,7 +66,7 @@
         <div class="img-container">
             {#if state === null}
                 🗋
-            {:else}
+            {:else if 'url' in state}
                 <img src={state.url} alt="upload" />
             {/if}
         </div>
@@ -76,6 +78,14 @@
             </div>
         </form>
         <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
+
+        {#if state !== null && !('blob' in state)}
+            
+            {#each Object.entries(state) as [key, value] (key)}
+                <p>{key} {value}</p>
+            {/each}
+        {/if}
+
     {/await}
 </main>
 <Capture bind:this={capture} on:image={closeAfterRenderImage} />
