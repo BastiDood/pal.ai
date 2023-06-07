@@ -40,18 +40,18 @@
 
 <style>
     label {
-        font-weight: 900;
         color: var(--palai-black);
+        font-weight: 900;
     }
 
     input[type="file"]::file-selector-button {
-        padding: 0.5rem 1rem 0.5rem;
         border: 0.125rem solid currentColor;
         border-radius: 0.25rem;
         background-color: transparent;
         color: var(--palai-black);
         cursor: pointer;
         font-weight: bold;
+        padding: 0.5rem 1rem 0.5rem;
         transition: opacity 0.3s;
     }
 

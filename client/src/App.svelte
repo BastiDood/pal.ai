@@ -1,11 +1,9 @@
 <script lang="ts">
     import { register } from './register.ts';
     import FileUpload from './components/FileUpload.svelte';
-    import Button from './components/Button.svelte';
     import ResultCard from './components/ResultCard.svelte';
 
     let src = '';
-
     function renderImage(event: CustomEvent) {
         if (src) URL.revokeObjectURL(src);
         src = URL.createObjectURL(event.detail);
@@ -23,32 +21,33 @@
                 🗋
             {/if}
         </div>
-        <FileUpload on:image={renderImage} on:destroy={() => URL.revokeObjectURL(src)} />
+        <FileUpload on:image={renderImage} />
         <ResultCard accuracy={0.9667} disease="Tungro" />
     {/await}
 </main>
 
 <style>
     main {
-        height: 100vh;
+        align-content: center;
         display: grid;
         grid-gap: 1rem;
+        height: 100vh;
         justify-items: center;
-        align-content: center;
     }
+
     .img-container {
-        width: 224px;
-        height: 224px;
+        align-items: center;
         border: 0.125rem solid var(--palai-black);
         border-radius: 0.5rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
         font-size: 2rem;
+        height: 224px;
+        justify-content: center;
+        width: 224px;
     }
 
     img {
-        width: inherit;
         height: inherit;
+        width: inherit;
     }
 </style>
