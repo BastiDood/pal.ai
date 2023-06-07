@@ -3,9 +3,12 @@
 
     import { register } from './register.ts';
 
+    import Button from './components/Button.svelte';
+    import Capture from './components/Capture.svelte';
     import FileUpload from './components/FileUpload.svelte';
     import ResultCard from './components/ResultCard.svelte';
-    import Button from './components/Button.svelte';
+
+    let capture: Capture | undefined;
 
     let src = '';
     function renderImage(event: CustomEvent<File>) {
@@ -30,9 +33,10 @@
             {/if}
         </div>
         <FileUpload on:image={renderImage} />
-        <Button>📷 Open Webcam</Button>
+        <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
     {/await}
 </main>
+<Capture bind:this={capture} />
 
 <style>
     main {

@@ -5,22 +5,30 @@
 </script>
 
 <script lang="ts">
-    import { onMount } from 'svelte';
-
     let video: HTMLVideoElement | undefined;
-    onMount(() => {
-        navigator
-            .mediaDevices
-            .getUserMedia({
-                audio: false,
-                video: { facingMode: 'environment' },
-            })
-            .then(stream => {
-                assert(typeof video !== 'undefined');
-                video.srcObject = stream;
-            })
-            .catch(console.error);
-    });
+
+    export async function open() {
+        if (typeof video === 'undefined')
+            return false;
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+            audio: false,
+            video: { facingMode: 'environment' },
+        });
+
+        video.srcObject = stream;
+        return true;
+    }
+
+    export function close() {
+        if (typeof video === 'undefined' || video.srcObject === null)
+            return false;
+
+        assert(video.srcObject instanceof MediaStream);
+        video.srcObject.getVideoTracks().forEach(track => track.stop());
+
+        return true;
+    }
 
     export function capture() {
         if (typeof video === 'undefined' || video.srcObject === null)
@@ -36,7 +44,7 @@
     }
 </script>
 
-<video autoplay bind:this={video}></video>
+<video muted autoplay bind:this={video}></video>
 
 <style>
     video {
