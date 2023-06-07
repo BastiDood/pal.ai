@@ -39,10 +39,16 @@
         font-weight: 900;
     }
 
-    input[type="file"]::file-selector-button {
+    input[type="file"] {
+        font-family: inherit;
         border: 0.125rem solid currentColor;
-        border-radius: 0.25rem;
-        background-color: transparent;
+        border-radius: 0.75rem;
+        background-color: lightgray;
+    }
+
+    input[type="file"]::file-selector-button {
+        border: none;
+        background-color: var(--palai-yellow);
         color: var(--palai-black);
         cursor: pointer;
         font-weight: bold;
