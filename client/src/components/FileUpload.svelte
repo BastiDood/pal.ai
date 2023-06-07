@@ -1,6 +1,5 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
-    import { onDestroy } from 'svelte';
 
     import { upload } from '../api/upload.ts';
 
@@ -24,10 +23,6 @@
         if (typeof file !== 'undefined')
             dispatch('image', file);
     }
-
-    onDestroy(() => {
-        dispatch('destroy');
-    });
 </script>
 
 <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>

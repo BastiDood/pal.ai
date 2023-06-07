@@ -1,13 +1,20 @@
 <script lang="ts">
+    import { onDestroy } from 'svelte';
+
     import { register } from './register.ts';
+
     import FileUpload from './components/FileUpload.svelte';
     import ResultCard from './components/ResultCard.svelte';
 
     let src = '';
-    function renderImage(event: CustomEvent) {
+    function renderImage(event: CustomEvent<File>) {
         if (src) URL.revokeObjectURL(src);
         src = URL.createObjectURL(event.detail);
     }
+
+    onDestroy(() => {
+        if (src) URL.revokeObjectURL(src);
+    });
 </script>
 
 <main>
