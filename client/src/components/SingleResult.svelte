@@ -1,10 +1,10 @@
 <script lang="ts">
     import { displayNames } from '../utils';
     
-    import Accuracy from './Accuracy.svelte';
+    import Confidence from './ConfidenceScore.svelte';
 
     export let disease: string;
-    export let accuracy: number;
+    export let confidence: number;
 </script>
 
 <div>
@@ -13,7 +13,7 @@
     {:else}
         <p>Disease Identified: {displayNames(disease)}</p>
     {/if}
-    <p>Accuracy: <Accuracy {accuracy} /></p>
+    <p>Confidence: <Confidence {confidence} /></p>
 </div>
 
 <style>

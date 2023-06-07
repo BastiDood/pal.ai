@@ -11,11 +11,11 @@
     <h1>Results (Top 5)</h1>
     <hr />
     <div class="group">
-        {#each Object.entries(results) as [disease, accuracy] (disease)}
-            <SingleResult {disease} {accuracy}/>
+        {#each Object.entries(results) as [disease, confidence] (disease)}
+            <SingleResult {disease} {confidence} />
         {/each}
 
-        <Button>Try Another</Button>
+        <Button>Try another photo</Button>
     </div>
 </div>
 
@@ -37,6 +37,6 @@
     .group {
         display: grid;
         justify-content: space-around;
-        gap: 0.5rem;
+        gap: 0.75rem;
     }
 </style>
