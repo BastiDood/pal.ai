@@ -2,6 +2,7 @@
     import { onDestroy } from 'svelte';
 
     import { register } from './register.ts';
+    import { upload } from './api/upload.ts';
 
     import Button from './components/Button.svelte';
     import Capture from './components/Capture.svelte';
@@ -35,6 +36,24 @@
         capture?.close();
     }
 
+    async function handleSubmit(this: HTMLFormElement) {
+        if (state === null) {
+            alert('Please upload an image.');
+            return;
+        }
+
+        const payload = await upload(state.blob);
+        if (payload === null) {
+            alert('The model is still starting up. Please try again later.');
+            return;
+        }
+
+        revokeBlobUrl();
+        state = null;
+        this.reset();
+        console.log(payload);
+    }
+
     onDestroy(revokeBlobUrl);
 </script>
 
@@ -49,7 +68,13 @@
                 <img src={state.url} alt="upload" />
             {/if}
         </div>
-        <FileUpload on:image={renderImage} />
+        <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
+            <label for="upload">🌾 Upload Image</label>
+            <div>
+                <FileUpload on:image={renderImage} />
+                <Button type="submit" variant="tertiary">Submit</Button>
+            </div>
+        </form>
         <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
     {/await}
 </main>
@@ -79,5 +104,10 @@
     img {
         height: inherit;
         width: inherit;
+    }
+    
+    label {
+        color: var(--palai-black);
+        font-weight: 900;
     }
 </style>
