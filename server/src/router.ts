@@ -40,11 +40,13 @@ async function get(req: Request) {
 }
 
 async function post(req: Request) {
+    info('[POST] uploading request');
     const res = await fetch('https://api-inference.huggingface.co/models/jkrperson/Beit-for-rice-disease', {
         headers: { Authorization: `Bearer ${env.API_KEY}` },
         method: 'POST',
         body: req.body,
     });
+    info('[POST] receiving request');
     const json = await res.json();
     switch (res.status) {
         case Status.OK:
