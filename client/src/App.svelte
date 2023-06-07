@@ -5,6 +5,7 @@
 
     import FileUpload from './components/FileUpload.svelte';
     import ResultCard from './components/ResultCard.svelte';
+    import Button from './components/Button.svelte';
 
     let src = '';
     function renderImage(event: CustomEvent<File>) {
@@ -29,7 +30,7 @@
             {/if}
         </div>
         <FileUpload on:image={renderImage} />
-        <ResultCard accuracy={0.9667} disease="Tungro" />
+        <Button>📷 Open Webcam</Button>
     {/await}
 </main>
 
