@@ -38,6 +38,10 @@
         capture?.close();
     }
 
+    function resetUpload() {
+        state = null;
+    }
+
     async function handleSubmit(this: HTMLFormElement) {
         if (state === null) {
             alert('Please upload an image.');
@@ -70,19 +74,18 @@
                 <img src={state.url} alt="upload" />
             {/if}
         </div>
-        <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
+        {#if state === null || 'blob' in state}
+            <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
             <label for="upload">🌾 Upload Image</label>
             <div>
                 <FileUpload on:image={renderImage} />
                 <Button type="submit" variant="tertiary">Submit</Button>
             </div>
-        </form>
-        <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
-
-        {#if state !== null && !('blob' in state)}
-            <ResultCard results={state}/>
+            </form>
+            <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
+        {:else}
+            <ResultCard results={state} on:reset={resetUpload}/>
         {/if}
-
     {/await}
 </main>
 <Capture bind:this={capture} on:image={closeAfterRenderImage} />

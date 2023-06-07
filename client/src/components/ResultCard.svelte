@@ -1,10 +1,18 @@
 <script lang="ts">
+    import { createEventDispatcher } from 'svelte';
+
     import type { LabelsRecord } from '../models/Classification';
 
     import Button from './Button.svelte';
     import SingleResult from './SingleResult.svelte';
 
     export let results: LabelsRecord;
+
+    const dispatch = createEventDispatcher();
+
+    function resetHandler() {
+        dispatch('reset');
+    }
 </script>
 
 <div class="root">
@@ -15,7 +23,7 @@
             <SingleResult {disease} {confidence} />
         {/each}
 
-        <Button>Try another photo</Button>
+        <Button on:click={resetHandler}>Try another photo</Button>
     </div>
 </div>
 
