@@ -59,9 +59,10 @@
         border-radius: 0.5rem;
         display: flex;
         font-size: 2rem;
-        height: 224px;
         justify-content: center;
+        height: 224px;
         width: 224px;
+        object-fit: contain;
     }
 
     img {
