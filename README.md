@@ -19,3 +19,10 @@ In the front end, [pal.ai] is an installable progressive web app (PWA) written i
 [Svelte]: https://svelte.dev/
 [TypeScript]: https://www.typescriptlang.org/
 [Parcel]: https://parceljs.org/
+
+# Project Members
+
+* [Macaraeg, Marc Gabriel C.](https://github.com/SporadicToast)
+* [Ortiz, Sebastian Luis S.](https://github.com/BastiDood)
+* [Raborar, Angelica Julianne A.](https://github.com/Anjellyrika)
+* [Resabal, Jose Kristian K.](https://github.com/jkrperson)
