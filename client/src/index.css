@@ -9,6 +9,14 @@
 @font-face {
     font-family: 'Fraunces';
     font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('assets/fonts/fraunces/bold.ttf');
+}
+
+@font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
     font-weight: 900;
     font-display: swap;
     src: url('assets/fonts/fraunces/black.ttf');
@@ -24,7 +32,7 @@
 
     --dark-green: #354842;
     --success-green: #7bb555;
-    --warning-orange: #f8a51d;
+    --warning-orange: #c2a13e;
     --danger-red: #f44336;
 
     font-family: 'Fraunces';

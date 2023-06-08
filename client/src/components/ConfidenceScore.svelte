@@ -1,26 +1,26 @@
 <script context="module" lang="ts">
-    function toClass(accuracy: number) {
-        if (accuracy < 0)
+    export function toClass(confidence: number) {
+        if (confidence < 0)
             return null;
-        if (accuracy < 0.8)
+        if (confidence < 0.75)
             return 'low';
-        if (accuracy < 0.95)
+        if (confidence < 0.9)
             return 'medium';
-        if (accuracy <= 1.0)
+        if (confidence <= 1.0)
             return 'high';
         return null;
     }
 </script>
 
 <script lang="ts">
-    export let accuracy: number;
-    $: css = toClass(accuracy);
+    export let confidence: number;
+    $: css = toClass(confidence);
 </script>
 
 {#if css === null}
     <span class="low">Out of bounds!</span>
 {:else}
-    {@const score = accuracy * 100}
+    {@const score = confidence * 100}
     <span class={css}>{score.toFixed(2)}%</span>
 {/if}
 
@@ -28,11 +28,11 @@
 	.high {
 		color: var(--success-green);
 	}
-	
+
 	.medium {
 		color: var(--warning-orange);
 	}
-	
+
 	.low {
 		color: var(--danger-red);
 	}

@@ -12,7 +12,7 @@
     button {
         background-color: transparent;
         border: 0.125rem solid currentColor;
-        border-radius: 0.25rem;
+        border-radius: 0.75rem;
         color: var(--palai-black);
         cursor: pointer;
         font-family: inherit;

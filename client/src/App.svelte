@@ -1,8 +1,11 @@
 <script lang="ts">
     import { onDestroy } from 'svelte';
+    import { expoOut } from 'svelte/easing';
+    import { fly } from 'svelte/transition';
 
     import { register } from './register.ts';
     import { upload } from './api/upload.ts';
+    import type { Classification } from './models/Classification.ts';
 
     import Button from './components/Button.svelte';
     import Capture from './components/Capture.svelte';
@@ -14,6 +17,7 @@
     interface State {
         blob: Blob;
         url: string;
+        results?: Classification | null;
     }
 
     let state = null as State | null;
@@ -23,17 +27,19 @@
             URL.revokeObjectURL(state.url);
     }
 
-    function renderImage({ detail }: CustomEvent<Blob>) {
+    function swapImage({ detail }: CustomEvent<Blob>) {
         revokeBlobUrl();
-        state = {
-            blob: detail,
-            url: URL.createObjectURL(detail),
-        };
+        state = { blob: detail, url: URL.createObjectURL(detail) } satisfies State;
     }
 
-    function closeAfterRenderImage(event: CustomEvent<Blob>) {
-        renderImage(event);
+    function closeAfterSwapImage(event: CustomEvent<Blob>) {
+        swapImage(event);
         capture?.close();
+    }
+
+    function resetUpload() {
+        revokeBlobUrl();
+        state = null;
     }
 
     async function handleSubmit(this: HTMLFormElement) {
@@ -42,16 +48,16 @@
             return;
         }
 
-        const payload = await upload(state.blob);
-        if (payload === null) {
+        // TODO: add loading screen
+        state = { ...state, results: null };
+        const results = await upload(state.blob);
+        if (results === null) {
             alert('The model is still starting up. Please try again later.');
             return;
         }
 
-        revokeBlobUrl();
-        state = null;
         this.reset();
-        console.log(payload);
+        state = { ...state, results } satisfies State;
     }
 
     onDestroy(revokeBlobUrl);
@@ -63,22 +69,37 @@
     {:then}
         <div class="img-container">
             {#if state === null}
-                🗋
+                🌾
             {:else}
                 <img src={state.url} alt="upload" />
             {/if}
         </div>
-        <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
-            <label for="upload">🌾 Upload Image</label>
-            <div>
-                <FileUpload on:image={renderImage} />
-                <Button type="submit" variant="tertiary">Submit</Button>
-            </div>
-        </form>
-        <Button on:click={() => capture?.open()}>📷 Open Webcam</Button>
+        {#if state === null || typeof state.results === 'undefined'}
+            <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
+                <p class="label">📤 Upload Image</p>
+                <div class="upload-choice">
+                    <FileUpload on:image={swapImage} />
+                    <p>OR</p>
+                    <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
+                </div>
+                <span class="submitBtn">
+                    <Button type="submit" variant="tertiary">Submit</Button>
+                </span>
+            </form>
+        {:else}
+            {@const { results } = state}
+            {#if results === null}
+                <!-- TODO: Spinning thingy... -->
+                Loading...
+            {:else}
+                <span in:fly={{y: 50, duration: 1200, easing: expoOut}}>
+                    <ResultCard {results} on:reset={resetUpload} />
+                </span>
+            {/if}
+        {/if}
     {/await}
 </main>
-<Capture bind:this={capture} on:image={closeAfterRenderImage} />
+<Capture bind:this={capture} on:image={closeAfterSwapImage} />
 
 <style>
     main {
@@ -87,6 +108,12 @@
         grid-gap: 1rem;
         height: 100vh;
         justify-items: center;
+        margin: 0 1rem;
+    }
+
+    form {
+        width: 100%;
+        max-width: 360px;
     }
 
     .img-container {
@@ -105,9 +132,26 @@
         height: inherit;
         width: inherit;
     }
-    
-    label {
+
+    .label {
         color: var(--palai-black);
         font-weight: 900;
+        margin: 0;
+    }
+
+    .upload-choice {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .upload-choice > p {
+        margin: 0;
+        text-align: center;
+    }
+
+    .submitBtn {
+        float: right;
     }
 </style>
