@@ -1,12 +1,12 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
 
-    import type { LabelsRecord } from '../models/Classification';
+    import { type Classification, Disease } from '../models/Classification.ts';
 
     import Button from './Button.svelte';
     import SingleResult from './SingleResult.svelte';
 
-    export let results: LabelsRecord;
+    export let results: Classification;
 
     const dispatch = createEventDispatcher();
 
@@ -19,10 +19,9 @@
     <h1>Results (Top 5)</h1>
     <hr />
     <div class="group">
-        {#each Object.entries(results) as [disease, confidence] (disease)}
+        {#each results as { label: disease, score: confidence } (disease) }
             <SingleResult {disease} {confidence} />
         {/each}
-
         <Button on:click={resetHandler}>Try another photo</Button>
     </div>
 </div>
