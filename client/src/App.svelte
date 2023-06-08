@@ -78,7 +78,7 @@
         </div>
         {#if state === null || typeof state.results === 'undefined'}
             <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
-                <p class="label">📤 Upload Image</p>
+                <label for="upload">📤 Upload Image</label>
                 <div class="upload-choice">
                     <FileUpload on:image={swapImage} />
                     <p>OR</p>
@@ -118,6 +118,11 @@
         max-width: 360px;
     }
 
+    label {
+        font-weight: 900;
+        color: var(--palai-black);
+    }
+
     .img-container {
         align-items: center;
         border: 0.125rem solid var(--palai-black);
@@ -133,12 +138,6 @@
     img {
         height: inherit;
         width: inherit;
-    }
-
-    .label {
-        color: var(--palai-black);
-        font-weight: 900;
-        margin: 0;
     }
 
     .upload-choice {
