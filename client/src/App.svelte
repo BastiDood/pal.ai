@@ -3,6 +3,7 @@
     import { expoOut } from 'svelte/easing';
     import { fly } from 'svelte/transition';
 
+    import { assert } from './assert.ts';
     import { register } from './register.ts';
     import { upload } from './api/upload.ts';
     import type { Classification } from './models/Classification.ts';
@@ -48,10 +49,11 @@
             return;
         }
 
-        // TODO: add loading screen
         state = { ...state, results: null };
         const results = await upload(state.blob);
         if (results === null) {
+            assert(delete state.results);
+            state = state;
             alert('The model is still starting up. Please try again later.');
             return;
         }
