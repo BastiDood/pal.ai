@@ -12,15 +12,21 @@
     }
 </script>
 
-<input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />    
+<input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />
 
 <style>
     input[type="file"] {
+        cursor: pointer;
         font-family: inherit;
         border: 0.125rem solid currentColor;
         border-radius: 0.75rem;
         background-color: lightgray;
         filter: brightness(1);
+        transition: filter 0.3s;
+    }
+
+    input[type="file"]:hover {
+        filter: brightness(1.10);
     }
 
     input[type="file"]::file-selector-button {
@@ -30,14 +36,9 @@
         cursor: pointer;
         font-weight: bold;
         padding: 0.5rem 1rem 0.5rem;
-        transition: filter 0.3s;
     }
 
-    input[type="file"]::file-selector-button:active {   
+    input[type="file"]::file-selector-button:active {
         box-shadow: inset 0.125rem 0.125rem rgba(0, 0, 0, 0.4);
 	}
-
-    input[type="file"]::file-selector-button:hover {   
-        filter: brightness(1.10);
-    }
 </style>

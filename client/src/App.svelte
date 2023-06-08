@@ -108,6 +108,12 @@
         grid-gap: 1rem;
         height: 100vh;
         justify-items: center;
+        margin: 1rem;
+    }
+
+    form {
+        width: 100%;
+        max-width: 360px;
     }
 
     .img-container {
@@ -126,16 +132,23 @@
         height: inherit;
         width: inherit;
     }
-    
-    label {
+
+    .label {
         color: var(--palai-black);
         font-weight: 900;
+        margin: 0;
     }
 
     .upload-choice {
         display: flex;
         flex-direction: column;
-        padding: 0.5rem 0;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .upload-choice > p {
+        margin: 0;
+        text-align: center;
     }
 
     .submitBtn {
