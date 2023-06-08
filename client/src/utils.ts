@@ -1,34 +1,36 @@
-export function displayNames(raw: string) {
-    switch (raw) {
-        case 'bacterial_leaf_blight':
+import { Disease } from './models/Classification.ts';
+
+export function displayNames(disease: Disease) {
+    switch (disease) {
+        case Disease.BacterialLeafBlight:
             return 'Bacterial leaf blight';
-        case 'bacterial_leaf_streak':
+        case Disease.BacterialLeafStreak:
             return 'Bacterial leaf streak';
-        case 'bakanae':
+        case Disease.Bakanae:
             return 'Bakanae';
-        case 'brown_spot':
+        case Disease.BrownSpot:
             return 'Brown spot';
-        case 'grassy_stunt_virus':
+        case Disease.GrassyStuntVirus:
             return 'Grassy stunt virus';
-        case 'healthy_rice_plant':
+        case Disease.HealthyRicePlant:
             return 'Healthy';
-        case 'narrow_brown_spot':
+        case Disease.NarrowBrownSpot:
             return 'Narrow brown spot';
-        case 'ragged_stunt_virus':
+        case Disease.RaggedStuntVirus:
             return 'Ragged stunt virus';
-        case 'rice_blast':
+        case Disease.RiceBlast:
             return 'Rice blast';
-        case 'rice_false_smut':
+        case Disease.RiceFalseSmut:
             return 'Rice false smut';
-        case 'sheath_blight':
+        case Disease.SheathBlight:
             return 'Sheath blight';
-        case 'sheath_rot':
+        case Disease.SheathRot:
             return 'Sheath rot';
-        case 'stem_rot':
+        case Disease.StemRot:
             return 'Stem rot';
-        case 'tungro_virus':
+        case Disease.TungroVirus:
             return 'Tungro virus';
         default:
-            return '';
+            throw new Error('unexpected disease type');
     }
 }
