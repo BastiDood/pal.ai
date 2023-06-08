@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
-    function toClass(confidence: number) {
+    export function toClass(confidence: number) {
         if (confidence < 0)
             return null;
-        if (confidence < 0.8)
+        if (confidence < 0.75)
             return 'low';
-        if (confidence < 0.95)
+        if (confidence < 0.9)
             return 'medium';
         if (confidence <= 1.0)
             return 'high';
@@ -28,11 +28,11 @@
 	.high {
 		color: var(--success-green);
 	}
-	
+
 	.medium {
 		color: var(--warning-orange);
 	}
-	
+
 	.low {
 		color: var(--danger-red);
 	}
