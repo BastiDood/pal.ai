@@ -9,16 +9,27 @@
 </script>
 
 <div>
-    {#if disease === Disease.HealthyRicePlant}
-        <p>Healthy (No disease identified)</p>
-    {:else}
-        <p>Disease Identified: {displayNames(disease)}</p>
-    {/if}
+    <p class="name">{displayNames(disease)}</p>
     <p>Confidence: <Confidence {confidence} /></p>
 </div>
 
 <style>
     p {
         margin: 0;
+        width: fit-content;
+        padding: 0.15rem 0.85rem;
+        color: var(--palai-black);
+        font: inherit;
+    }
+
+    .name {
+        border-radius: 0.75rem;
+        background-color: var(--palai-green);
+        color: var(--palai-black);
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
     }
 </style>
