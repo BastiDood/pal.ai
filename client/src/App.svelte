@@ -108,7 +108,7 @@
         grid-gap: 1rem;
         height: 100vh;
         justify-items: center;
-        margin: 1rem;
+        margin: 0 1rem;
     }
 
     form {
