@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy } from 'svelte';
-    import { fly } from 'svelte/transition';
     import { expoOut } from 'svelte/easing';
+    import { fly } from 'svelte/transition';
 
     import { register } from './register.ts';
     import { upload } from './api/upload.ts';
