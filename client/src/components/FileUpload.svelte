@@ -12,7 +12,14 @@
     }
 </script>
 
-<input type="file" accept="image/*" name="upload" id="upload" bind:files on:change={handleChange} />
+<input
+    type="file"
+    accept="image/*"
+    name="upload"
+    id="upload"
+    bind:files
+    on:change={handleChange}
+/>
 
 <style>
     input[type="file"] {
