@@ -2,11 +2,10 @@
     import { onDestroy } from 'svelte';
     import { fly } from 'svelte/transition';
     import { expoOut } from 'svelte/easing';
-    import { assert } from './assert.ts';
 
     import { register } from './register.ts';
     import { upload } from './api/upload.ts';
-    import type { LabelsRecord } from './models/Classification.ts';
+    import type { Classification } from './models/Classification.ts';
 
     import Button from './components/Button.svelte';
     import Capture from './components/Capture.svelte';
@@ -18,33 +17,29 @@
     interface State {
         blob: Blob;
         url: string;
+        results?: Classification | null;
     }
-    
-    let state = null as State | LabelsRecord | null;
-    let imgcache = '';
+
+    let state = null as State | null;
 
     function revokeBlobUrl() {
-        if (state !== null && 'url' in state)
+        if (state !== null)
             URL.revokeObjectURL(state.url);
     }
 
-    function renderImage({ detail }: CustomEvent<Blob>) {
+    function swapImage({ detail }: CustomEvent<Blob>) {
         revokeBlobUrl();
-        state = {
-            blob: detail,
-            url: URL.createObjectURL(detail),
-        } satisfies State;
-        imgcache = state.url;
+        state = { blob: detail, url: URL.createObjectURL(detail) } satisfies State;
     }
 
-    function closeAfterRenderImage(event: CustomEvent<Blob>) {
-        renderImage(event);
+    function closeAfterSwapImage(event: CustomEvent<Blob>) {
+        swapImage(event);
         capture?.close();
     }
 
     function resetUpload() {
+        revokeBlobUrl();
         state = null;
-        imgcache = '';
     }
 
     async function handleSubmit(this: HTMLFormElement) {
@@ -53,16 +48,16 @@
             return;
         }
 
-        assert('blob' in state);
-        const payload = await upload(state.blob);
-        if (payload === null) {
+        // TODO: add loading screen
+        state = { ...state, results: null };
+        const results = await upload(state.blob);
+        if (results === null) {
             alert('The model is still starting up. Please try again later.');
             return;
         }
 
-        revokeBlobUrl();
         this.reset();
-        state = payload;
+        state = { ...state, results } satisfies State;
     }
 
     onDestroy(revokeBlobUrl);
@@ -76,30 +71,35 @@
             {#if state === null}
                 🌾
             {:else}
-                <img src={imgcache} alt="upload" />
+                <img src={state.url} alt="upload" />
             {/if}
         </div>
-
-        {#if state === null || 'blob' in state}
+        {#if state === null || typeof state.results === 'undefined'}
             <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
-            <label for="upload">📤 Upload Image</label>
-            <div class="upload-choice">
-                <FileUpload on:image={renderImage} />
-                <span>or</span>
-                <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
-            </div>
-            <span class="submitBtn">
-                <Button type="submit" variant="tertiary">Submit</Button>
-            </span>
+                <p class="label">📤 Upload Image</p>
+                <div class="upload-choice">
+                    <FileUpload on:image={swapImage} />
+                    <p>OR</p>
+                    <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
+                </div>
+                <span class="submitBtn">
+                    <Button type="submit" variant="tertiary">Submit</Button>
+                </span>
             </form>
         {:else}
-            <span in:fly="{{y: 50, duration: 1200, easing: expoOut}}">    
-                <ResultCard results={state} on:reset={resetUpload} />
-            </span>
+            {@const { results } = state}
+            {#if results === null}
+                <!-- TODO: Spinning thingy... -->
+                Loading...
+            {:else}
+                <span in:fly={{y: 50, duration: 1200, easing: expoOut}}>
+                    <ResultCard {results} on:reset={resetUpload} />
+                </span>
+            {/if}
         {/if}
     {/await}
 </main>
-<Capture bind:this={capture} on:image={closeAfterRenderImage} />
+<Capture bind:this={capture} on:image={closeAfterSwapImage} />
 
 <style>
     main {
