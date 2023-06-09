@@ -11,6 +11,7 @@
     import Button from './components/Button.svelte';
     import Capture from './components/Capture.svelte';
     import FileUpload from './components/FileUpload.svelte';
+    import Loading from './components/Loading.svelte';
     import ResultCard from './components/ResultCard.svelte';
 
     let capture: Capture | undefined;
@@ -67,7 +68,7 @@
 
 <main>
     {#await register()}
-        Loading service worker...
+        <Loading />
     {:then}
         <div class="img-container">
             {#if state === null}
@@ -91,8 +92,7 @@
         {:else}
             {@const { results } = state}
             {#if results === null}
-                <!-- TODO: Spinning thingy... -->
-                Loading...
+                <Loading />
             {:else}
                 <span in:fly={{y: 50, duration: 1200, easing: expoOut}}>
                     <ResultCard {results} on:reset={resetUpload} />
