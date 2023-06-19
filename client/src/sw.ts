@@ -9,6 +9,15 @@ async function installWorker() {
             ? path.slice(0, -INDEX.length) || '/'
             : path;
     });
+
+    // Manually add GitHub images
+    files.push(
+        'https://avatars.githubusercontent.com/u/39114273',
+        'https://avatars.githubusercontent.com/u/98273014',
+        'https://avatars.githubusercontent.com/u/31538126',
+        'https://avatars.githubusercontent.com/u/22850026',
+    );
+
     const cache = await caches.open(version);
     return cache.addAll(files);
 }
