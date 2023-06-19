@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte';
 
     import { displayNames } from '../utils.ts';
-    import { type Classification, Disease } from '../models/Classification.ts';
+    import type { Classification} from '../models/Classification.ts';
 
     import Button from './Button.svelte';
     import { toClass } from './ConfidenceScore.svelte';
