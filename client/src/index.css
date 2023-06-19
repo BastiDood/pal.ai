@@ -39,6 +39,10 @@
     background-color: var(--palai-white);
 }
 
+:root, body {
+    height: 100%;
+}
+
 body, h1 {
     margin: 0;
 }

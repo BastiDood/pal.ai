@@ -70,52 +70,63 @@
     {#await register()}
         <Loading />
     {:then}
-        <div class="img-container">
-            {#if state === null}
-                🌾
+        <section>
+            <div class="img-container">
+                {#if state === null}
+                    🌾
+                {:else}
+                    <img src={state.url} alt="upload" />
+                {/if}
+            </div>
+            {#if state === null || typeof state.results === 'undefined'}
+                <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
+                    <label for="upload">📤 Upload Image</label>
+                    <div class="upload-choice">
+                        <FileUpload on:image={swapImage} />
+                        <p>OR</p>
+                        <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
+                    </div>
+                    <div class="submitBtn">
+                        <Button type="submit" variant="tertiary">Submit</Button>
+                    </div>
+                </form>
             {:else}
-                <img src={state.url} alt="upload" />
+                {@const { results } = state}
+                {#if results === null}
+                    <Loading />
+                {:else}
+                    <div class="result" in:fly={{y: 50, duration: 1200, easing: expoOut}}>
+                        <ResultCard {results} on:reset={resetUpload} />
+                    </div>
+                {/if}
             {/if}
-        </div>
-        {#if state === null || typeof state.results === 'undefined'}
-            <form on:submit|self|preventDefault|stopPropagation={handleSubmit}>
-                <label for="upload">📤 Upload Image</label>
-                <div class="upload-choice">
-                    <FileUpload on:image={swapImage} />
-                    <p>OR</p>
-                    <Button type="button" on:click={() => capture?.open()}>📷 Open Camera</Button>
-                </div>
-                <span class="submitBtn">
-                    <Button type="submit" variant="tertiary">Submit</Button>
-                </span>
-            </form>
-        {:else}
-            {@const { results } = state}
-            {#if results === null}
-                <Loading />
-            {:else}
-                <span in:fly={{y: 50, duration: 1200, easing: expoOut}}>
-                    <ResultCard {results} on:reset={resetUpload} />
-                </span>
-            {/if}
-        {/if}
+        </section>
     {/await}
 </main>
 <Capture bind:this={capture} on:image={closeAfterSwapImage} />
 
 <style>
     main {
-        align-content: center;
-        display: grid;
-        grid-gap: 1rem;
-        height: 100vh;
-        justify-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
         margin: 0 1rem;
     }
 
+    section {
+        align-items: center;
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+    }
+
     form {
-        width: 100%;
+        margin: 0 auto;
         max-width: 360px;
+        width: 100%;
     }
 
     label {
@@ -129,10 +140,11 @@
         border-radius: 0.5rem;
         display: flex;
         font-size: 2rem;
-        justify-content: center;
         height: 224px;
-        width: 224px;
+        justify-content: center;
+        margin: 0 auto;
         object-fit: contain;
+        width: 224px;
     }
 
     img {
