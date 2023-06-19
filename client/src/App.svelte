@@ -13,6 +13,7 @@
     import FileUpload from './components/FileUpload.svelte';
     import Loading from './components/Loading.svelte';
     import ResultCard from './components/ResultCard.svelte';
+    import User from './components/User.svelte';
 
     let capture: Capture | undefined;
 
@@ -102,6 +103,15 @@
             {/if}
         </section>
     {/await}
+    <footer>
+        <p>Made in <a href="https://github.com/BastiDood/pal.ai" title="pal.ai">GitHub</a> by</p>
+        <div>
+            <User id={39114273} name="BastiDood">Basti Ortiz</User>
+            <User id={98273014} name="Anjellyrika">Jelly Raborar</User>
+            <User id={31538126} name="jkrperson">Jose Resabal</User>
+            <User id={22850026} name="SporadicToast">Marc Macaraeg</User>
+        </div>
+    </footer>
 </main>
 <Capture bind:this={capture} on:image={closeAfterSwapImage} />
 
@@ -121,6 +131,18 @@
         flex-direction: column;
         gap: 1rem;
         justify-content: center;
+    }
+
+    footer > p {
+        margin: 1rem;
+        text-align: center;
+    }
+
+    footer > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 1rem;
     }
 
     form {
