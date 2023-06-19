@@ -68,10 +68,10 @@
 </script>
 
 <main>
-    {#await register()}
-        <Loading />
-    {:then}
-        <section>
+    <section>
+        {#await register()}
+            <Loading />
+        {:then}
             <div class="img-container">
                 {#if state === null}
                     🌾
@@ -101,8 +101,8 @@
                     </div>
                 {/if}
             {/if}
-        </section>
-    {/await}
+        {/await}
+    </section>
     <footer>
         <p>Made in <a href="https://github.com/BastiDood/pal.ai" title="pal.ai">GitHub</a> by</p>
         <div>
