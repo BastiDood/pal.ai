@@ -1,6 +1,6 @@
 # pal.ai
 
-[pal.ai] is a progressive web app the uses images of rice leaves to identify rice leaf diseases.
+[pal.ai] is a progressive web app that uses images of rice leaves to identify rice leaf diseases.
 
 In the back end, we use a minimal [Deno Deploy] server that proxies the [Hugging Face Hosted Inference API], which interfaces with a model that uses a [BEiT vision transformer model][BEiT] to classify images of rice plants for the presence/absence of diseases. The model is pre-trained using [ImageNet 22k] then finetuned using the [PH Rice Leave Diseases dataset](https://www.kaggle.com/datasets/shrupyag001/philippines-rice-diseases). The model achieves **95% accuracy** using the dataset test set despite having only 1120 training data points.
 
