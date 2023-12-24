@@ -1,0 +1,41 @@
+{
+    "name": "pal.ai",
+    "short_name": "pal.ai",
+    "description": "A rice disease classification app.",
+    "icons": [
+        {
+            "src": "icons/logo-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/logo-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/logo-64x64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/logo-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/logo-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/logo-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "display": "standalone",
+    "background_color": "#f4f4e8",
+    "theme_color": "#9cba71",
+    "start_url": "."
+}
