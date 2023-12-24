@@ -4,7 +4,7 @@
 
 In the back end, we use a minimal [SvelteKit] server that proxies the [Hugging Face Hosted Inference API], which interfaces with a model that uses a [BEiT vision transformer model][BEiT] to classify images of rice plants for the presence/absence of diseases. The model is pre-trained using [ImageNet 22k] then finetuned using the [PH Rice Leave Diseases dataset](https://www.kaggle.com/datasets/shrupyag001/philippines-rice-diseases). The model achieves **95% accuracy** using the dataset test set despite having only 1120 training data points.
 
-[pal.ai]: https://palai.deno.dev/
+[pal.ai]: https://palai.vercel.app/
 [SvelteKit]: https://kit.svelte.dev/
 [Hugging Face Hosted Inference API]: https://huggingface.co/docs/api-inference/index
 [BEiT]: https://arxiv.org/pdf/2106.08254.pdf
