@@ -9,6 +9,6 @@ Any file in this project that does not state otherwise and is not listed below a
 
 ## Exceptions
 
-| Files                            | Author(s)                                                                 | License                                                              |
-| -------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `src/lib/fonts/Fraunces/*.woff2` | [The Fraunces Project Authors](https://github.com/undercasetype/Fraunces) | [Open Font License v1.1](./client/src/assets/fonts/fraunces/OFL.txt) |
+| Files                            | Author(s)                                  | License                                                    |
+| -------------------------------- | ------------------------------------------ | ---------------------------------------------------------- |
+| `src/lib/fonts/FiraSans/*.woff2` | The Mozilla Foundation and Telefonica S.A. | [Open Font License v1.1](./src/lib/fonts/FiraSans/LICENSE) |

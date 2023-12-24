@@ -1,4 +1,4 @@
-@import url('$lib/fonts/Fraunces/font.css');
+@import url('$lib/fonts/FiraSans/font.css');
 
 :root {
     --palai-yellow: #e5c261;
@@ -12,7 +12,7 @@
     --warning-orange: #c2a13e;
     --danger-red: #f44336;
 
-    font-family: Fraunces, serif;
+    font-family: 'Fira Sans', serif;
     background-color: var(--palai-white);
 }
 
