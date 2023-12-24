@@ -20,9 +20,6 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^3.0.1
     version: 3.0.1(svelte@4.2.8)(vite@5.0.10)
-  '@types/serviceworker':
-    specifier: ^0.0.81
-    version: 0.0.81
   '@types/w3c-image-capture':
     specifier: ^1.0.10
     version: 1.0.10
@@ -760,10 +757,6 @@ packages:
 
   /@types/semver@7.5.6:
     resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}
-    dev: true
-
-  /@types/serviceworker@0.0.81:
-    resolution: {integrity: sha512-XZ9gX1AWmOZQyvdvZeAAcWwz1dUqoqE9uXgt6yrVNLpnYWZtTDOUzGyfctsyJtcxoWtJ6U60iwcWYfweNwclCA==}
     dev: true
 
   /@types/w3c-image-capture@1.0.10:

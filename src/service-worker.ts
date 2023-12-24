@@ -1,10 +1,15 @@
 /// <reference types="@sveltejs/kit" />
-/// <reference types="@types/serviceworker" />
+/// <reference no-default-lib="true"/>
+/// <reference lib="esnext" />
+/// <reference lib="webworker" />
 
 import { build, files, version } from '$service-worker';
 import { assert } from './lib/assert';
 
-async function installWorker() {
+// eslint-disable-next-line init-declarations
+declare let self: ServiceWorkerGlobalScope;
+
+async function addFiles() {
     const cache = await caches.open(version);
     await cache.addAll([
         ...build,
@@ -20,7 +25,7 @@ function* deleteAll(keys: Iterable<string>) {
     for (const key of keys) if (key !== version) yield caches.delete(key);
 }
 
-async function activateWorker() {
+async function purgeCache() {
     const keys = await caches.keys();
     const results = await Promise.all(deleteAll(keys));
     assert(
@@ -35,29 +40,16 @@ async function interceptFetch(req: Request) {
     return res ?? fetch(req);
 }
 
-self.addEventListener(
-    'install',
-    evt => {
-        assert(evt instanceof ExtendableEvent);
-        evt.waitUntil(installWorker());
-    },
-    { once: true, passive: true },
-);
+self.addEventListener('install', evt => evt.waitUntil(addFiles()), { once: true, passive: true });
 
-self.addEventListener(
-    'activate',
-    evt => {
-        assert(evt instanceof ExtendableEvent);
-        evt.waitUntil(activateWorker());
-    },
-    { once: true, passive: true },
-);
+self.addEventListener('activate', evt => evt.waitUntil(purgeCache()), { once: true, passive: true });
 
 self.addEventListener(
     'fetch',
     evt => {
-        assert(evt instanceof FetchEvent);
-        evt.respondWith(interceptFetch(evt.request));
+        const { request } = evt;
+        if (request.method !== 'GET') return;
+        evt.respondWith(interceptFetch(request));
     },
     { passive: true },
 );

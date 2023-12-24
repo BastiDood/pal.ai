@@ -22,7 +22,6 @@
         "@sveltejs/adapter-vercel": "^4.0.3",
         "@sveltejs/kit": "^2.0.6",
         "@sveltejs/vite-plugin-svelte": "^3.0.1",
-        "@types/serviceworker": "^0.0.81",
         "@types/w3c-image-capture": "^1.0.10",
         "@typescript-eslint/eslint-plugin": "^6.15.0",
         "@typescript-eslint/parser": "^6.15.0",
