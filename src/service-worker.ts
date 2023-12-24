@@ -3,7 +3,7 @@
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
 
-import { build, files, version } from '$service-worker';
+import { build, files, prerendered, version } from '$service-worker';
 import { assert } from './lib/assert';
 
 // eslint-disable-next-line init-declarations
@@ -12,6 +12,7 @@ declare let self: ServiceWorkerGlobalScope;
 async function addFiles() {
     const cache = await caches.open(version);
     await cache.addAll([
+        ...prerendered,
         ...build,
         ...files,
         'https://avatars.githubusercontent.com/u/39114273',
