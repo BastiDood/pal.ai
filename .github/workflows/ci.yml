@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Deploy to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -7,17 +7,37 @@ on:
     branches: main
 
 jobs:
-  client:
-    defaults:
-      run:
-        working-directory: client
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v3
-      - name: Install pnpm
-        run: npm install --global pnpm
+      - name: Install `pnpm` via Corepack
+        run: corepack enable
+      - name: Get `pnpm` Store Directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v3
+        name: Setup `pnpm` Cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Build Project
+        run: pnpm install
+      - name: Check Formatters
+        run: pnpm fmt
+      - name: Check HTML
+        run: pnpm lint:html
+      - name: Check CSS
+        run: pnpm lint:css
+      - name: Synchronize SvelteKit
+        run: pnpm sync
+      - name: Check JavaScript
+        run: pnpm lint:js
+      - name: Check Svelte
+        run: pnpm lint:svelte
+      - name: Build Website
         run: pnpm build
